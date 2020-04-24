@@ -1,10 +1,32 @@
 package com.thornBird.sbdt.modules.common;
 
-public class Result {
+public class Result<T> {
 	
 	private int  status;
 	private String message;
-	private Object object;
+	private T object;
+	
+	
+	public Result() {
+		super();
+	}
+	
+	
+	public Result(int status, String message) {
+		super();
+		this.status = status;
+		this.message = message;
+	}
+
+
+	public Result(int status, String message, T object) {
+		super();
+		this.status = status;
+		this.message = message;
+		this.object = object;
+	}
+
+
 	public int getStatus() {
 		return status;
 	}
@@ -17,11 +39,22 @@ public class Result {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public Object getObject() {
+	public T getObject() {
 		return object;
 	}
-	public void setObject(Object object) {
+	public void setObject(T object) {
 		this.object = object;
+	}
+
+
+	public enum ResultEnum{
+		
+		SUCCESS(200),FAILD(100);
+		public int status;
+		private ResultEnum(int status) {
+			this.status = status;
+		}
+		
 	}
 	
 }
