@@ -5,19 +5,16 @@ public class Result<T> {
 	private int  status;
 	private String message;
 	private T object;
-	
-	
+		
 	public Result() {
 		super();
 	}
-	
 	
 	public Result(int status, String message) {
 		super();
 		this.status = status;
 		this.message = message;
 	}
-
 
 	public Result(int status, String message, T object) {
 		super();
