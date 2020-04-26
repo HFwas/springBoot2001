@@ -43,6 +43,9 @@ public class CityController {
 		return cityService.getCitiesByPage(currentPage, pageSize, countryId);
 	}
 	
+	/*
+	 * 127.0.0.1/api/city?cityName=Shanghai
+	 */
 	@RequestMapping("/city")
 	City getCityByName(@RequestParam(required = false) String cityName,
 			@RequestParam(required = false) String  localCityName){
