@@ -23,7 +23,9 @@ public class TestPageController {
 	private CountryService countryService;
 	@Autowired
 	private CityService cityService;
-	
+	/*
+	 * 127.0.0.1/test/index
+	 */
 	@RequestMapping("/index")
 	public String testIndexPage(ModelMap modelMap){
 		
@@ -51,7 +53,7 @@ public class TestPageController {
 		modelMap.addAttribute("updateCityUri", "/api/city");
 		modelMap.addAttribute("cities", cities);
 		
-		modelMap.addAttribute("template", "test/index");
+//		modelMap.addAttribute("template", "test/index");
 		return "index";
 	} 
 	

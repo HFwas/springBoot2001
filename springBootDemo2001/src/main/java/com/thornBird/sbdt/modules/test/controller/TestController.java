@@ -1,17 +1,22 @@
 package com.thornBird.sbdt.modules.test.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.thornBird.sbdt.modules.test.vo.ConfigBean;
 
-@Controller
+@RestController
+@RequestMapping("/api/test")
 public class TestController {
 	
 	
@@ -36,8 +41,7 @@ public class TestController {
 	 * http://127.0.0.1/test/log
 	 */
 	//TRACE<DEBUG<INFO<WARN<ERROR
-	@RequestMapping("/test/log")
-	@ResponseBody
+	@RequestMapping("/log")
 	public String loggingTest(){
 		LOGGER.trace("this is TRACE test");
 		LOGGER.debug("this is DEBUG test");
@@ -50,8 +54,7 @@ public class TestController {
 	/*
 	 * http://127.0.0.1/test/config
 	 */
-	@RequestMapping("/test/config")
-	@ResponseBody
+	@RequestMapping("/config")
 	public String configTest(){
 		StringBuffer sBuffer = new StringBuffer();
 		sBuffer.append(port).append("---")
@@ -68,11 +71,11 @@ public class TestController {
 	}
 	
 	/*
-	 * http://127.0.0.1/test/appDesc
+	 * http://127.0.0.1/api/test/appDesc
 	 */
-	@RequestMapping("/test/appDesc")
-	@ResponseBody
-	public String getAppWordDesc(){
-		return "hello world";
+	@RequestMapping("/appDesc")
+	public String getAppWordDesc(HttpServletRequest request,@RequestParam String key){
+		String parameter = request.getParameter("key");		
+		return "hello world"+key+parameter;
 	}
 }
