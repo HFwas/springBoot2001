@@ -29,8 +29,7 @@ public class UrlInterceptor implements HandlerInterceptor {
 		
 		if (modelAndView == null || modelAndView.getViewName().startsWith("/redirect")) {
 			return ;
-		}
-		
+		}	
 		
 		String uri= request.getServletPath();
 		String template= (String) modelAndView.getModelMap().get("template");
@@ -39,7 +38,8 @@ public class UrlInterceptor implements HandlerInterceptor {
 			if (uri.startsWith("/")) {
 				uri = uri.substring(1);
 			}
-			modelAndView.getModelMap().get("uri");
+			//// ////////////
+			modelAndView.getModelMap().put("template", uri);
 		}
 		
 		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);

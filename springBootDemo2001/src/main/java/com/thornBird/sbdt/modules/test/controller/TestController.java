@@ -71,7 +71,7 @@ public class TestController {
 	}
 	
 	/*
-	 * http://127.0.0.1/api/test/appDesc
+	 * http://127.0.0.1/api/test/appDesc?key=fuck
 	 */
 	@RequestMapping("/appDesc")
 	public String getAppWordDesc(HttpServletRequest request,@RequestParam String key){
