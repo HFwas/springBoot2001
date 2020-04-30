@@ -1,16 +1,20 @@
 package com.thornBird.sbdt.modules.test.controller;
 
+import java.net.MalformedURLException;
+import java.nio.file.Paths;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.thornBird.sbdt.modules.test.vo.ConfigBean;
@@ -19,9 +23,7 @@ import com.thornBird.sbdt.modules.test.vo.ConfigBean;
 @RequestMapping("/api/test")
 public class TestController {
 	
-	
 	private static final Logger LOGGER= LoggerFactory.getLogger(TestController.class);
-	
 	
 	@Value("${server.port}")
 	private int port;
@@ -36,6 +38,22 @@ public class TestController {
 	
 	@Autowired
 	private ConfigBean configBean;
+	
+	@RequestMapping("/download")
+	public ResponseEntity<Resource> downloadFile(@RequestParam String fileName){
+
+		try {
+			Resource resource = new UrlResource(Paths.get("D:\\file\\"+fileName).toUri());
+			return ResponseEntity
+					.ok().header(HttpHeaders.CONTENT_TYPE, "application/octet-stream")
+					.header(HttpHeaders.CONTENT_DISPOSITION, 
+							String.format("attachment; filename=\"%s\"", resource.getFilename()))
+					.body(resource);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	/*
 	 * http://127.0.0.1/test/log

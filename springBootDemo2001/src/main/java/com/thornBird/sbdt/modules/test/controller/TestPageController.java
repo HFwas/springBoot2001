@@ -1,14 +1,19 @@
 package com.thornBird.sbdt.modules.test.controller;
 
-import java.util.Collections;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.omg.CORBA.PRIVATE_MEMBER;
+import org.apache.tomcat.util.http.fileupload.UploadContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thornBird.sbdt.modules.test.entity.City;
 import com.thornBird.sbdt.modules.test.entity.Country;
@@ -23,6 +28,73 @@ public class TestPageController {
 	private CountryService countryService;
 	@Autowired
 	private CityService cityService;
+	
+	/*
+	 * 127.0.0.1/test/files
+	 */
+	@PostMapping(value ="/files",consumes="multipart/form-data")
+	public String uploadFiles(@RequestParam MultipartFile[] files,
+			RedirectAttributes redirectAttributes){
+		
+			boolean result = true;
+			
+			try {
+				for (MultipartFile multipartFile : files) {
+					if (multipartFile.isEmpty()) {
+						continue;
+					}
+					String fileName = multipartFile.getOriginalFilename();
+					String destFilePath = "D:\\file\\"+fileName;
+					File file2 = new File(destFilePath);
+					multipartFile.transferTo(file2);
+				
+					result=false;
+				}
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+				redirectAttributes.addFlashAttribute("message","upload file failed ");
+				return "redirect:/test/index";
+			}
+			
+		if (result) {
+			redirectAttributes.addFlashAttribute("message","Please select file ");
+		}else{
+			redirectAttributes.addFlashAttribute("message","upload file Success");	
+		}
+		
+		return "redirect:/test/index";
+	}
+	
+	/*
+	 * 127.0.0.1/test/file
+	 */
+	@PostMapping(value ="/file",consumes="multipart/form-data")
+	public String uploadFile(@RequestParam MultipartFile file,
+			RedirectAttributes redirectAttributes){
+		
+		if (file.isEmpty()) {
+			redirectAttributes.addFlashAttribute("message", "Please select file;;; ");
+			return "redirect:/test/index";
+		}
+		
+		try {			
+			String fileName = file.getOriginalFilename();
+			String destFilePath = "D:\\file\\"+fileName;
+			File file2 = new File(destFilePath);
+			file.transferTo(file2);
+			
+			redirectAttributes.addFlashAttribute("message","Upload File Success;;;;");
+		} catch (IllegalStateException | IOException e) {
+			
+			redirectAttributes.addFlashAttribute("message","Upload File Failed;;;;");
+			e.printStackTrace();
+			return "redirect:/test/index";
+		}
+		
+		return "redirect:/test/index";
+	}
+	
+	
 	/*
 	 * 127.0.0.1/test/index
 	 */
