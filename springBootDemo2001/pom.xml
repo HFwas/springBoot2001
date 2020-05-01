@@ -72,6 +72,11 @@
 		    <artifactId>commons-lang3</artifactId>
 		</dependency>
 		
+		<!-- spring 监控 -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
 
 		<!--  test -->
 		<dependency>
