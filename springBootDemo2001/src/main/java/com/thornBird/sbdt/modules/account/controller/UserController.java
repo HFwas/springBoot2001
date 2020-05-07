@@ -17,7 +17,7 @@ import com.thornBird.sbdt.modules.account.service.UserService;
 
 @RestController
 @RequestMapping("/api")
-public class userController {
+public class UserController {
 	
 	@Autowired
 	private UserService userService;
