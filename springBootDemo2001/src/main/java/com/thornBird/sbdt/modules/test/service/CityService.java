@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageInfo;
-import com.thornBird.sbdt.modules.common.Result;
+import com.thornBird.sbdt.modules.common.vo.Result;
 import com.thornBird.sbdt.modules.test.entity.City;
 
 @Service

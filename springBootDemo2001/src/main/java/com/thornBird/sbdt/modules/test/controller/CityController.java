@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageInfo;
-import com.thornBird.sbdt.modules.common.Result;
+import com.thornBird.sbdt.modules.common.vo.Result;
 import com.thornBird.sbdt.modules.test.entity.City;
 import com.thornBird.sbdt.modules.test.service.CityService;
 

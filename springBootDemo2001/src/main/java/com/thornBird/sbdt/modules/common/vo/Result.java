@@ -1,4 +1,4 @@
-package com.thornBird.sbdt.modules.common;
+package com.thornBird.sbdt.modules.common.vo;
 
 public class Result<T> {
 	

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.thornBird.sbdt.modules.common.Result;
-import com.thornBird.sbdt.modules.common.Result.ResultEnum;
+import com.thornBird.sbdt.modules.common.vo.Result;
+import com.thornBird.sbdt.modules.common.vo.Result.ResultEnum;
 import com.thornBird.sbdt.modules.test.dao.CityDao;
 import com.thornBird.sbdt.modules.test.entity.City;
 import com.thornBird.sbdt.modules.test.service.CityService;
